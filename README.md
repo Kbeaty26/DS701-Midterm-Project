@@ -1,2 +1,2 @@
 # DS701-Midterm-Project
-### Members: Katherine Beaty, Rachel Olsen, Alexa Slaughter
+### Members: Katherine Beaty, Rachel Olson, Alexa Slaughter
