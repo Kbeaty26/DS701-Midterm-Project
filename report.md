@@ -10,9 +10,9 @@ The results suggest that homes do not form strongly separated groups, with silho
 
 The ARI between the two feature configurations was 0.94 at \(k=2\), indicating strong agreement, compared with 0.62 at \(k=3\), indicating less consistent assignments. Together with the higher silhouette score, this suggests that the two-cluster solution is more robust to feature selection, while the three-cluster solution provides more detailed but less stable segments.
 
-| 15 features | 18 features |
+| 15 Features | 18 Features |
 |:---:|:---:|
-| ![15-feature clustering](15features.png) | ![18-feature clustering](18features.png) |
+| ![15-feature clustering](results/15features.png) | ![18-feature clustering](results/18features.png) |
 
 ### Limitations
 
