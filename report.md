@@ -19,7 +19,7 @@ The baseline predicts each home's price as its **neighborhood median**. The floo
 - Gains are largest in neighborhoods with mixed housing stock. Model gain correlates with within-neighborhood price variability (r = 0.43), e.g. StoneBr and Veenker improve by ~21 percentage points.
 - *Ridge's large RMSE spread comes from one home.* Id 1299 is a 5,642 sq ft partial sale at \$160k, and Ridge predicts \$1.6M because linear models extrapolate. Excluding the 4 homes over 4,000 sq ft, as the dataset's author recommends, both Ridge and GBoost reach R² ≈ 0.92, compared with 0.52 for the baseline. The conclusion is unchanged.
 
-![Q1 predictions](q1_figure.png)
+![Q1 predictions](results/q1_figure.png)
 
 ### Limitations
 (1) There is no independent test score. `test.csv` has no prices, so all estimates come from cross-validation on one dataset. (2) Very large or partial sales are badly mispredicted. Estimates should flag homes for review by a person, not price them automatically. (3) The folds are random, not time-based. We do not show performance on future sales, such as after the 2008 downturn; that would need a time-based split or newer data. (4) Gradient-boosting hyperparameters were not tuned, so its performance may be slightly understated. (5) The results are predictive associations in one market (Ames, 2006–2010), not causal effects. Q3 examines which features drive them.
