@@ -43,3 +43,25 @@ The ARI between the two feature configurations was 0.94 at \(k=2\), indicating s
 ### Limitations
 
 The low silhouette scores indicate substantial overlap between clusters, so the segments should be interpreted as approximate property profiles rather than distinct housing categories. The three-cluster solution was more sensitive to feature selection, particularly the inclusion of second-floor area, suggesting that correlated features influenced the segmentation. K-means also favors compact, roughly spherical clusters and can be sensitive to skewed variables such as lot area. Future work could test log transformations, alternative clustering methods such as hierarchical clustering or Gaussian mixture models, and categorical features such as house style or neighborhood. In practice, real estate analysts should use these segments alongside neighborhood and other property characteristics rather than as strict rules for selecting comparable homes.
+
+## Question 3: Which property characteristics are consistently associated with sale price?
+
+### Approach
+
+We fit a random forest regressor using property characteristics, excluding identifiers, location, and sale-transaction fields. We evaluated it with five-fold cross-validation on the labeled training set; imputation and categorical encoding were fitted within each training fold. To identify robust predictors, we measured permutation importance on each held-out fold: the decrease in R² when a feature was shuffled. We also examined three plausible combinations of important features—total floor area × overall quality, total floor area × garage capacity, and house age × overall quality. For each pair, we compared the effect of jointly shuffling both features with shuffling either one alone, and used two-way partial-dependence surfaces to assess non-additive patterns. The unlabeled test set was not used.
+
+### Evidence
+
+Across the five folds, the random forest achieved a mean MAE of **$16,989 ± $1,967**, RMSE of **$30,244 ± $7,620**, and R² of **0.843 ± 0.099**. Total floor area (`TotalSF`) and overall quality (`OverallQual`) were the strongest individual predictors: both had positive permutation importance and ranked in the top 10 in all five folds. Overall condition was also positive and top-10 in all folds; garage capacity, lot area, and house age were positive in all folds and top-10 in three or four.
+
+| Feature combination | Joint permutation R² decrease | Additional decrease vs. stronger single feature | Partial-dependence H score |
+|---|---:|---:|---:|
+| **Total floor area × overall quality** | **0.706 ± 0.044** | **0.431** | **0.253 ± 0.013** |
+| Total floor area × garage capacity | 0.303 ± 0.032 | 0.026 | 0.028 ± 0.015 |
+| House age × overall quality | 0.169 ± 0.026 | 0.021 | 0.022 ± 0.005 |
+
+The area-quality pair carried the most combined predictive information, with a larger non-additive pattern in its partial-dependence surface than the other pairs. The other combinations added relatively little beyond their stronger individual feature. These findings suggest that home size and quality are particularly informative when considered together.
+
+### Limitations
+
+The pair analysis is exploratory and limited to three combinations selected from the important features; it does not establish that adding a handcrafted interaction improves predictive performance. Joint permutation importance measures reliance on the pair, not a pure interaction effect, while partial dependence can evaluate unrealistic combinations when features are correlated. Importance shows predictive association, not causation or whether a feature raises or lowers price. The cross-validation results come from one Ames Housing sample, and `test.csv` has no sale prices for independent evaluation.
