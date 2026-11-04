@@ -1,3 +1,5 @@
+Repository Link: https://github.com/Kbeaty26/DS701-Midterm-Project.git
+
 ## Question 1: Can property characteristics predict sale prices more accurately than neighborhood-level price estimates?
 
 ### Approach
