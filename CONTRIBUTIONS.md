@@ -34,3 +34,20 @@
 - Visualized clusters by year built and living area, and compared sale price by cluster after clustering (price was not used to build the clusters).
 - Ran a stability check with the Adjusted Rand Index (ARI) between runs: 0.94 at k=2 and 0.62 at k=3, showing the two-cluster split is robust to feature choice and the three-cluster split is more sensitive.
 - Wrote the clustering results section, covering the cluster naming tables, the comparison between runs, practical uses for agents, and limitations and next steps.
+
+### Rachel Olson - Contributions
+
+**Exploratory analysis (EDA notebook, question 3 section)**
+- Compared sale prices across building types and house styles, including category counts and median prices to account for groups with few sales.
+- Examined sale-price distributions by kitchen quality, heating quality, and central air, preserving the ordered quality categories from the data.
+- Compared basement finish and garage finish categories, treating missing values as "None" to represent homes without those features.
+- Calculated total bathroom count, including half baths, and compared its distribution with sale price.
+- Compared sale prices for homes with and without decks and porch types, summarizing group sizes and medians.
+
+**Modeling (Question 3 notebook)**
+- Built a random forest model using property characteristics, excluding identifiers, location, and sale-transaction fields, and evaluated it with 5-fold cross-validation.
+- Kept imputation, categorical encoding, and all other preprocessing inside each training fold to prevent data leakage.
+- Measured permutation importance on each held-out fold and summarized feature importance by average score and consistency across folds.
+- Compared three feature pairs (TotalSF × OverallQual, TotalSF × GarageCars, and HouseAge × OverallQual) using joint permutation importance and two-way partial-dependence surfaces.
+- Found that total floor area and overall quality were the strongest individual predictors, and that their combination showed the clearest non-additive pattern among the pairs examined.
+- Wrote the Question 3 report section, including the model results, interpretation, and limitations.
